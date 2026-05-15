@@ -4,178 +4,150 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     width: 100%;
-    height: 100vh;
-    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1628 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Courier New', monospace;
+    height: 100%;
     overflow: hidden;
-    position: relative;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a0e3a 100%);
+    font-family: 'Courier New', monospace;
 }
 
 canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-}
-
-.container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
     pointer-events: none;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
 
-/* Glitch Text Effect */
+/* Glitch effect for render-ooo */
 .glitch {
-    font-size: clamp(3rem, 15vw, 10rem);
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    position: relative;
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
     color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    position: relative;
     text-shadow: 
-        0 0 10px #00ff88,
-        0 0 20px #00ff88,
-        0 0 30px rgba(0, 255, 136, 0.5);
-    animation: glitch 0.8s infinite;
-    margin-bottom: 20px;
+        2px 2px 0px #ff00de,
+        4px 4px 0px #00ffff,
+        6px 6px 20px rgba(0, 255, 136, 0.5);
+    animation: glitch 0.3s ease-in-out infinite;
 }
 
 .glitch::before,
 .glitch::after {
     content: attr(data-text);
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0.8;
 }
 
 .glitch::before {
-    animation: glitch-before 0.8s infinite;
+    animation: glitch-1 0.3s ease-in-out infinite;
     color: #ff00de;
     z-index: -1;
-    text-shadow: -3px 0 #ff00de;
+    text-shadow: -2px 0 #00ffff;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
 }
 
 .glitch::after {
-    animation: glitch-after 0.8s infinite;
+    animation: glitch-2 0.3s ease-in-out infinite;
     color: #00ffff;
     z-index: -2;
-    text-shadow: 3px 0 #00ffff;
+    text-shadow: -2px 0 #ff00de;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
 @keyframes glitch {
     0% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(0);
+        text-shadow: 
+            2px 2px 0px #ff00de,
+            4px 4px 0px #00ffff,
+            6px 6px 20px rgba(0, 255, 136, 0.5);
     }
-    20% {
-        clip-path: polygon(0% 20%, 100% 0%, 100% 100%, 0% 80%);
-        transform: translate(-2px, 2px);
-    }
-    40% {
-        clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
-        transform: translate(2px, -2px);
-    }
-    60% {
-        clip-path: polygon(0% 50%, 100% 40%, 100% 60%, 0% 50%);
-        transform: translate(-1px, 1px);
-    }
-    80% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(1px, -1px);
+    50% {
+        text-shadow: 
+            -2px -2px 0px #ff00de,
+            -4px -4px 0px #00ffff,
+            -6px -6px 20px rgba(0, 255, 136, 0.5);
     }
     100% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(0);
+        text-shadow: 
+            2px 2px 0px #ff00de,
+            4px 4px 0px #00ffff,
+            6px 6px 20px rgba(0, 255, 136, 0.5);
     }
 }
 
-@keyframes glitch-before {
+@keyframes glitch-1 {
     0% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
-        transform: translate(-3px, 0);
+        clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        transform: translate(-2px, -2px);
     }
-    20% {
-        clip-path: polygon(0% 30%, 100% 0%, 100% 70%, 0% 100%);
-        transform: translate(3px, -2px);
-    }
-    40% {
-        clip-path: polygon(0% 0%, 100% 30%, 100% 100%, 0% 70%);
-        transform: translate(-2px, 2px);
-    }
-    60% {
-        clip-path: polygon(0% 40%, 100% 50%, 100% 60%, 0% 40%);
-        transform: translate(2px, -1px);
-    }
-    80% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(-1px, 1px);
+    50% {
+        clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+        transform: translate(2px, 2px);
     }
     100% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(0);
+        clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        transform: translate(-2px, -2px);
     }
 }
 
-@keyframes glitch-after {
+@keyframes glitch-2 {
     0% {
-        clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
-        transform: translate(3px, 0);
+        clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        transform: translate(2px, 2px);
     }
-    20% {
-        clip-path: polygon(0% 0%, 100% 30%, 100% 100%, 0% 70%);
-        transform: translate(-3px, 2px);
-    }
-    40% {
-        clip-path: polygon(0% 30%, 100% 0%, 100% 70%, 0% 100%);
-        transform: translate(3px, -2px);
-    }
-    60% {
-        clip-path: polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%);
-        transform: translate(-2px, 1px);
-    }
-    80% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(1px, -1px);
+    50% {
+        clip-path: polygon(0 80%, 100% 80%, 100% 100%, 0 100%);
+        transform: translate(-2px, -2px);
     }
     100% {
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        transform: translate(0);
+        clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        transform: translate(2px, 2px);
     }
 }
 
-/* Subtitle and Author */
+/* Subtitle styles */
 .subtitle {
-    font-size: clamp(1rem, 5vw, 2rem);
-    color: #888;
-    letter-spacing: 0.15em;
-    font-weight: 300;
-    text-transform: uppercase;
+    font-size: clamp(1rem, 3vw, 2rem);
+    color: rgba(0, 255, 136, 0.6);
+    margin-top: 2rem;
+    letter-spacing: 4px;
     animation: pulse-text 2s ease-in-out infinite;
 }
 
+/* Author name with neon glow */
 .author {
-    color: #00ff88;
+    color: #ff00de;
     font-weight: bold;
     text-shadow: 
-        0 0 5px #00ff88,
-        0 0 10px #00ff88;
-    animation: neon-pulse 1.5s ease-in-out infinite;
+        0 0 10px #ff00de,
+        0 0 20px #ff00de,
+        0 0 30px rgba(255, 0, 222, 0.5);
+    animation: neon-glow 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse-text {
@@ -187,29 +159,34 @@ canvas {
     }
 }
 
-@keyframes neon-pulse {
+@keyframes neon-glow {
     0%, 100% {
         text-shadow: 
-            0 0 5px #00ff88,
-            0 0 10px #00ff88,
-            0 0 15px rgba(0, 255, 136, 0.5);
+            0 0 10px #ff00de,
+            0 0 20px #ff00de,
+            0 0 30px rgba(255, 0, 222, 0.5);
     }
     50% {
         text-shadow: 
-            0 0 10px #00ff88,
-            0 0 20px #00ff88,
-            0 0 30px rgba(0, 255, 136, 0.8),
-            0 0 40px rgba(0, 255, 136, 0.5);
+            0 0 20px #ff00de,
+            0 0 30px #ff00de,
+            0 0 40px rgba(255, 0, 222, 0.8);
     }
 }
 
-/* Responsive Design */
+/* Responsive design */
 @media (max-width: 768px) {
     .glitch {
-        font-size: clamp(2rem, 12vw, 5rem);
+        letter-spacing: 4px;
     }
 
     .subtitle {
-        font-size: clamp(0.8rem, 4vw, 1.2rem);
+        margin-top: 1rem;
+        letter-spacing: 2px;
     }
+}
+
+/* Remove default browser interactions */
+body {
+    cursor: default;
 }
